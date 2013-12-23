@@ -1,7 +1,7 @@
 void startScreen()
 {
-	background(0, 152, 116);
 
+	background(0, 152, 116);
 	startScreenControl();
 }
 

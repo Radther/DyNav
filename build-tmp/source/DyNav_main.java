@@ -27,47 +27,88 @@ int navScreen = 0;
 public void setup()
 {
 	size(800,1280);
-	map = loadImage("map.jpg");
-	mapCenter();
 	background(0);
 }
 
 public void draw()
 {
+	//startscreen
 	if (navScreen == 0)
 	{
 		startScreen();
 	}
+	//mapscreen
 	if (navScreen == 1) 
 	{
+		loadMap();
 		mapScreen();
 	}
+	print(frameRate + "\n");
 }
-
+public void loadMap()
+{
+	// load map
+	map = loadImage("map.jpg");
+}
 public void mapCenter()
 {
 	// center the map
 	mapX = (width-map.width)/2;
 	mapY = (height-map.height)/2;
 }
+// menu X and Y coords
+int menuX = 500;
+int menuY = 500;
+// menu diameter
+int menuXY = 300;
+
+// map in use
+int mapDraged = 0;
+
 public void mapScreen()
 {
-	mapCenter();
 	// move map
 	background(0);
-	if(mousePressed)
-	{ 
-	 	mapX = mouseX-offX;
-	 	mapY = mouseY-offY;
-	}
 
-	// update pos
-	image(map, mapX, mapY);
+	mapScreenControl();
 
 	// get the offset
 	offX = mouseX-mapX;
 	offY = mouseY-mapY;	
 
+	//map in use no longer
+	mapDraged = 0;
+	//button in use no long
+
+	mapScreenRender();
+}
+
+public void mapScreenControl()
+{
+	//get new pos
+	if (mousePressed)
+	{ 
+	 	mapX = mouseX-offX;
+	 	mapY = mouseY-offY;
+	 	mapDraged = 1;
+	}
+	
+	// activate manu button
+	if (mousePressed == true && menuX-(menuXY/2)<mouseX && mouseX<menuX+(menuXY/2) && menuY-(menuXY/2)<mouseY && mouseY<menuY+(menuXY/2) && mapDraged == 0) 
+	{
+		menuXY = 200;
+	}
+
+
+}
+
+public void mapScreenRender()
+{
+	// update pos
+	image(map, mapX, mapY);
+	fill(177, 99, 163);
+	noStroke();
+	ellipse(menuX, menuY, menuXY, menuXY);
 }
 public void mousePressed()
 {
@@ -75,8 +116,8 @@ public void mousePressed()
 }
 public void startScreen()
 {
-	background(0, 152, 116);
 
+	background(0, 152, 116);
 	startScreenControl();
 }
 

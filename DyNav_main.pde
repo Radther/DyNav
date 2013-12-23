@@ -11,19 +11,21 @@ int navScreen = 0;
 void setup()
 {
 	size(800,1280);
-	map = loadImage("map.jpg");
-	mapCenter();
 	background(0);
 }
 
 void draw()
 {
+	//startscreen
 	if (navScreen == 0)
 	{
 		startScreen();
 	}
+	//mapscreen
 	if (navScreen == 1) 
 	{
+		loadMap();
 		mapScreen();
 	}
+	print(frameRate + "\n");
 }
