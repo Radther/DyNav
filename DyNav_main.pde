@@ -8,8 +8,8 @@ int mapX, mapY;
 PImage map;
 // mouseposition offset to image
 int offX, offY;
-// screen
-int navScreen = 0;
+// current screen
+int currentScreen = 0;
 
 // regular old setup
 void setup()
@@ -22,16 +22,20 @@ void setup()
 void draw()
 {
 	//startscreen
-	if (navScreen == 0)
+	if (currentScreen == 0)
 	{
 		startScreen();
 	}
 	//mapscreen
-	if (navScreen == 1) 
+	if (currentScreen == 1) 
 	{
 		loadMap();
 		mapScreen();
 		petalNav();
+	}
+	// navigation screen
+	if (currentScreen == 2) {
+		navScreen();
 	}
 	print(frameRate + "\n");
 }

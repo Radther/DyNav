@@ -8,6 +8,6 @@ void startScreen()
 void startScreenControl()
 {
 	if (mousePressed == true) {
-		navScreen =1;
+		currentScreen =1;
 	}
 }

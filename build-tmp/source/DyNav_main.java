@@ -26,8 +26,8 @@ int mapX, mapY;
 PImage map;
 // mouseposition offset to image
 int offX, offY;
-// screen
-int navScreen = 0;
+// current screen
+int currentScreen = 2;
 
 // regular old setup
 public void setup()
@@ -40,18 +40,22 @@ public void setup()
 public void draw()
 {
 	//startscreen
-	if (navScreen == 0)
+	if (currentScreen == 0)
 	{
 		startScreen();
 	}
 	//mapscreen
-	if (navScreen == 1) 
+	if (currentScreen == 1) 
 	{
 		loadMap();
 		mapScreen();
 		petalNav();
 	}
-	// print(frameRate + "\n");
+	// navigation screen
+	if (currentScreen == 2) {
+		navScreen();
+	}
+	print(frameRate + "\n");
 }
 
 public void mouseReleased()
@@ -181,6 +185,13 @@ public void mousePressed()
 {
 
 }
+public void navScreen()
+{
+	background(255);
+	noStroke();
+	fill(0, 152, 116);
+	rect(0, 0, width, 80);
+}
 public void startScreen()
 {
 
@@ -191,7 +202,7 @@ public void startScreen()
 public void startScreenControl()
 {
 	if (mousePressed == true) {
-		navScreen =1;
+		currentScreen =1;
 	}
 }
   static public void main(String[] passedArgs) {

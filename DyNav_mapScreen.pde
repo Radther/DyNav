@@ -48,6 +48,7 @@ void mapScreenControl()
 			 	activated = 0;
 			 	
 			 }
+			 
 		}
 
 	}
