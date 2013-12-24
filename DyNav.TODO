@@ -6,7 +6,8 @@ Front screen:
 --- ✄ -----------------------
 
 Maps:
- ☐ moveable map
+ ✔ moveable map @done (13-12-24 14:20)
+ ✔ Zoom @map @done (13-12-24 14:20)
  petaNav:
   ☐ Working buttons that go away
   ☐ animation with bounce effect

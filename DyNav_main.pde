@@ -1,3 +1,7 @@
+//import controlP5 for sliders and whatnot
+import controlP5.*;
+ControlP5 cp5;
+
 // image pos
 int mapX, mapY;
 // create map
@@ -10,8 +14,9 @@ int navScreen = 0;
 // regular old setup
 void setup()
 {
-	size(800,1280);
+	size(800,980);
 	background(0);
+	cp5 = new ControlP5(this);
 }
 
 void draw()
@@ -26,6 +31,12 @@ void draw()
 	{
 		loadMap();
 		mapScreen();
+		petalNav();
 	}
 	print(frameRate + "\n");
+}
+
+void mouseReleased()
+{
+	petalPressed = 0;
 }
