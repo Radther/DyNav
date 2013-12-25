@@ -9,7 +9,7 @@ Maps:
  ✔ moveable map @done (13-12-24 14:20)
  ✔ Zoom @map @done (13-12-24 14:20)
  petaNav:
-  ☐ Working buttons that go away
+  ✔ Working buttons that go away @done (13-12-25 17:39)
   ☐ animation with bounce effect
 
 --- ✄ -----------------------
@@ -18,4 +18,4 @@ Directions:
  ☐ List of directions
  ☐ Push to Pebble
  ☐ Back
- ☐ Show as seperate screen
+ ✔ Show as seperate screen @done (13-12-25 17:39)
