@@ -55,7 +55,7 @@ public void draw()
 	if (currentScreen == 2) {
 		navScreen();
 	}
-	print(frameRate + "\n");
+	// print(frameRate + "\n");
 }
 
 public void mouseReleased()
@@ -169,6 +169,7 @@ public void mapScreenControl()
 			 	activated = 0;
 			 	
 			 }
+			 
 		}
 
 	}
@@ -191,6 +192,24 @@ public void navScreen()
 	noStroke();
 	fill(0, 152, 116);
 	rect(0, 0, width, 80);
+
+	int rows = (height/80) + 1;
+	// print(rows);
+
+	for (int i = 2; i<rows; i = i + 1) {
+		stroke(0);
+		strokeWeight(1);
+		strokeCap(ROUND);
+		if (mousePressed == false) {
+			line(0, i*80, width-0, i*80);
+
+		}
+		if (mousePressed == true) {
+			line(0, i*80+mouseY, width-0, i*80+mouseY);
+		}
+
+	}
+
 }
 public void startScreen()
 {

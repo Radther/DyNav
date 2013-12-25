@@ -9,7 +9,7 @@ PImage map;
 // mouseposition offset to image
 int offX, offY;
 // current screen
-int currentScreen = 0;
+int currentScreen = 2;
 
 // regular old setup
 void setup()
@@ -37,7 +37,7 @@ void draw()
 	if (currentScreen == 2) {
 		navScreen();
 	}
-	print(frameRate + "\n");
+	// print(frameRate + "\n");
 }
 
 void mouseReleased()
