@@ -9,7 +9,7 @@ PImage map;
 // mouseposition offset to image
 int offX, offY;
 // current screen
-int currentScreen = 2;
+int currentScreen = 0;
 
 // regular old setup
 void setup()

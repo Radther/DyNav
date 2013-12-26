@@ -27,7 +27,7 @@ PImage map;
 // mouseposition offset to image
 int offX, offY;
 // current screen
-int currentScreen = 2;
+int currentScreen = 0;
 
 // regular old setup
 public void setup()
@@ -73,7 +73,7 @@ int activated =0;
 public void petalNav()
 {
 	if (activated == 0) {
-		petalNavDeActivated();
+		petalNavDeactivated();
 	}
 	if (activated == 1) {
 		petalNavActivated();
@@ -94,7 +94,7 @@ public void petalNavActivated()
 	ellipse(menuX-0, menuY-180, menuXY, menuXY);
 }
 
-public void petalNavDeActivated()
+public void petalNavDeactivated()
 {
 	// create the main menu button
 	fill(0, 152, 116);
@@ -186,31 +186,30 @@ public void mousePressed()
 {
 
 }
-public void navScreen()
-{
-	background(255);
-	noStroke();
-	fill(0, 152, 116);
-	rect(0, 0, width, 80);
+int rows;
+ public void navScreen()
+ {
+ 	background(255);
+ 	noStroke();
+ 	fill(0, 152, 116);
+ 	rect(0, 0, width, 80);
 
 	int rows = (height/80) + 1;
 	// print(rows);
+	
+}
 
-	for (int i = 2; i<rows; i = i + 1) {
+public void nav_screenRender()
+{
+		for (int i = 2; i<rows; i = i + 1) {
 		stroke(0);
 		strokeWeight(1);
 		strokeCap(ROUND);
-		if (mousePressed == false) {
-			line(0, i*80, width-0, i*80);
-
-		}
-		if (mousePressed == true) {
-			line(0, i*80+mouseY, width-0, i*80+mouseY);
-		}
+		line(0, i*80, width-0, i*80);
 
 	}
 
-}
+ }
 public void startScreen()
 {
 

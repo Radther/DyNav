@@ -9,7 +9,7 @@ int activated =0;
 void petalNav()
 {
 	if (activated == 0) {
-		petalNavDeActivated();
+		petalNavDeactivated();
 	}
 	if (activated == 1) {
 		petalNavActivated();
@@ -30,7 +30,7 @@ void petalNavActivated()
 	ellipse(menuX-0, menuY-180, menuXY, menuXY);
 }
 
-void petalNavDeActivated()
+void petalNavDeactivated()
 {
 	// create the main menu button
 	fill(0, 152, 116);
