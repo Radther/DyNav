@@ -1,16 +1,22 @@
 //map number
 int mapNo = 1;
+// image pos
+int mapX, mapY;
+// create map
+PImage map;
 
-//zoom level
-float zoom = 1.0;
+// mouseposition offset to image
+int offX, offY;
+
+//zoomLevel level
+float zoomLevel = 1.0;
 
 int petalPressed = 0;
 void mapScreen()
 {
-	// move map
 	background(0);
 
-	// cp5.addSlider("zoom")
+	// cp5.addSlider("zoomLevel")
  //    	.setPosition(100,50)
  //    	.setRange(.5,5)
  //    	;
@@ -58,6 +64,6 @@ void mapScreenControl()
 void mapScreenRender()
 {
 	// update pos
-	image(map, mapX, mapY, width*zoom, height*zoom);
+	image(map, mapX, mapY, width*zoomLevel, height*zoomLevel);
 
 }

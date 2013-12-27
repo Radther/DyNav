@@ -20,12 +20,6 @@ public class DyNav_main extends PApplet {
 
 ControlP5 cp5;
 
-// image pos
-int mapX, mapY;
-// create map
-PImage map;
-// mouseposition offset to image
-int offX, offY;
 // current screen
 int currentScreen = 0;
 
@@ -68,16 +62,30 @@ int menuY = 500;
 // menu diameter
 int menuXY = 60;
 int activated =0;
+//create images
+PImage mainMenu;
+PImage search;
+PImage services;
+PImage navigation;
+PImage zoom;
+PImage zoomPlus;
+PImage zoomMinus;
 
 //Petal navigation for map screen
 public void petalNav()
 {
+	//load icons
+	mainMenu = loadImage("mainMenu.png");
+	search = loadImage("search.png");
+	services = loadImage("services.png");
+	// open or closed
 	if (activated == 0) {
-		petalNavDeactivated();
+		petalNavDeactivated(); //open
 	}
 	if (activated == 1) {
-		petalNavActivated();
+		petalNavActivated(); //closed
 	}
+
 
 }
 
@@ -86,9 +94,10 @@ public void petalNavActivated()
 	// create the main menu button
 	fill(0, 152, 116);
 	noStroke();
-	ellipse(menuX, menuY, menuXY, menuXY);
+	image(mainMenu, menuX, menuY);
 	// create the mini menu buttons
-	ellipse(menuX-180, menuY-0, menuXY, menuXY);
+	image(search, menuX-180, menuY-0);
+	image(services, menuX-155, menuY-90, menuXY, menuXY);
 	ellipse(menuX-155, menuY-90, menuXY, menuXY);
 	ellipse(menuX-90, menuY-155, menuXY, menuXY);
 	ellipse(menuX-0, menuY-180, menuXY, menuXY);
@@ -99,7 +108,7 @@ public void petalNavDeactivated()
 	// create the main menu button
 	fill(0, 152, 116);
 	noStroke();
-	ellipse(menuX, menuY, menuXY, menuXY);
+	image(mainMenu, menuX, menuY);
 }
 public void loadMap()
 {
@@ -121,17 +130,23 @@ public void mapCenter()
 }
 //map number
 int mapNo = 1;
+// image pos
+int mapX, mapY;
+// create map
+PImage map;
 
-//zoom level
-float zoom = 1.0f;
+// mouseposition offset to image
+int offX, offY;
+
+//zoomLevel level
+float zoomLevel = 1.0f;
 
 int petalPressed = 0;
 public void mapScreen()
 {
-	// move map
 	background(0);
 
-	// cp5.addSlider("zoom")
+	// cp5.addSlider("zoomLevel")
  //    	.setPosition(100,50)
  //    	.setRange(.5,5)
  //    	;
@@ -179,7 +194,7 @@ public void mapScreenControl()
 public void mapScreenRender()
 {
 	// update pos
-	image(map, mapX, mapY, width*zoom, height*zoom);
+	image(map, mapX, mapY, width*zoomLevel, height*zoomLevel);
 
 }
 public void mousePressed()

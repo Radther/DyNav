@@ -2,12 +2,6 @@
 import controlP5.*;
 ControlP5 cp5;
 
-// image pos
-int mapX, mapY;
-// create map
-PImage map;
-// mouseposition offset to image
-int offX, offY;
 // current screen
 int currentScreen = 0;
 
