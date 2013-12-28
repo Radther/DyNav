@@ -13,14 +13,17 @@ PImage mapDown;
 PImage greenCircle;
 
 // menu X and Y coords
-int menuX = 500;
-int menuY = 500;
+int menuX = 420;
+int menuY = 400;
 // menu diameter
 int menuXY = 60;
 
 //zoom and map display opens
 int zoomOpen = 0;
 int mapOpen = 0;
+
+//animation for petal
+int petalAnim = 0;
 
 // varibles for postions
 int menuX1 = menuX - 180;
@@ -57,7 +60,8 @@ void petalNavControl(){
 	}
 
 	// pressed
-	if (mousePressed == true && (mouseX>menuX && mouseX<menuX+menuXY) && (mouseY>menuY && mouseY<menuY+menuXY)) //menuX-(menuXY/2)<mouseX && mouseX<menuX+(menuXY/2) && menuY-(menuXY/2)<mouseY && mouseY<menuY+(menuXY/2)) 
+	if (mousePressed == true && (mouseX>menuX && mouseX<menuX+menuXY) && 
+		(mouseY>menuY && mouseY<menuY+menuXY))
 	{
 		if (petalPressed == 0) 
 		{
@@ -78,27 +82,70 @@ void petalNavControl(){
 	//control button actions
 	if (activated == 1) {
 		//search
-		if (mousePressed == true && (mouseX>menuX1 && mouseX<menuX1+menuXY) && (mouseY>menuY1 && mouseY<menuY1+menuXY)) {
+		if (mousePressed == true && (mouseX>menuX1 && mouseX<menuX1+menuXY) && 
+		(mouseY>menuY1 && mouseY<menuY1+menuXY)) {
 			currentScreen = 0;
 		}
 		//navigation
-		if (mousePressed == true && (mouseX>menuX2 && mouseX<menuX2+menuXY) && (mouseY>menuY2 && mouseY<menuY2+menuXY)) {
+		if (mousePressed == true && (mouseX>menuX2 && mouseX<menuX2+menuXY) && 
+		(mouseY>menuY2 && mouseY<menuY2+menuXY)) {
 			currentScreen = 2;
 		}
 		//services
-		if (mousePressed == true && (mouseX>menuX3 && mouseX<menuX3+menuXY) && (mouseY>menuY3 && mouseY<menuY3+menuXY)) {
+		if (mousePressed == true && (mouseX>menuX3 && mouseX<menuX3+menuXY) && 
+		(mouseY>menuY3 && mouseY<menuY3+menuXY)) {
 			currentScreen = 3;
 		}
 		//zoom
-		if (mousePressed == true && (mouseX>menuX4 && mouseX<menuX4+menuXY) && (mouseY>menuY4 && mouseY<menuY4+menuXY)) {
+		if (mousePressed == true && (mouseX>menuX4 && mouseX<menuX4+menuXY) && 
+		(mouseY>menuY4 && mouseY<menuY4+menuXY) && zoomOpen!=1) {
 			zoomOpen = 1;
 			mapOpen = 0;
+			delay(500);
 		}
 		//map display
-		if (mousePressed == true && (mouseX>menuX5 && mouseX<menuX5+menuXY) && (mouseY>menuY5 && mouseY<menuY5+menuXY)) {
+		if (mousePressed == true && (mouseX>menuX5 && mouseX<menuX5+menuXY) && 
+		(mouseY>menuY5 && mouseY<menuY5+menuXY) && mapOpen!=1) {
 			mapOpen = 1;
 			zoomOpen = 0;
+			delay(500);
 		}
+		if (zoomOpen == 1) {
+			if (mousePressed == true && (mouseX>menuX4 && mouseX<menuX4+menuXY) && 
+			(mouseY>menuY4-(menuXY/2) && mouseY<menuY4+(menuXY/2))) {
+				zoomLevel = zoomLevel + .1;
+			}
+			if (mousePressed == true && (mouseX>menuX4 && mouseX<menuX4+menuXY) && 
+			(mouseY>menuY4+(menuXY/2) && mouseY<menuY4+menuXY+(menuXY/2))) {
+				zoomLevel = zoomLevel - .1;
+			}
+		}
+		if (mapOpen == 1) {
+			if (mousePressed == true && (mouseX>menuX5 && mouseX<menuX5+menuXY) && 
+			(mouseY>menuY5-(menuXY/2) && mouseY<menuY5+(menuXY/2))) {
+				if (mapLevel == 2) {
+					mapLevel = 1;
+					delay(500);
+				}
+				else {
+					mapLevel = mapLevel + 1;
+					delay(500);
+				}
+			}
+			if (mousePressed == true && (mouseX>menuX5 && mouseX<menuX5+menuXY) && 
+			(mouseY>menuY5+(menuXY/2) && mouseY<menuY5+menuXY+(menuXY/2))) {
+				if (mapLevel == 1) {
+					mapLevel = 2;
+					delay(500);
+				}
+				else {
+					mapLevel = mapLevel - 1;
+					delay(500);
+				}
+
+			}
+		}
+
 	}
 }
 

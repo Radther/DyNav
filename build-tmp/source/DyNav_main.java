@@ -26,7 +26,7 @@ int currentScreen = 0;
 // regular old setup
 public void setup()
 {
-	size(800,980);
+	size(800,1280);
 	background(0);
 	cp5 = new ControlP5(this);
 }
@@ -53,11 +53,13 @@ public void draw()
 		servScreen();
 	}
 	// print(frameRate + "\n");
+	print(offset);
 }
 
 public void mouseReleased()
 {
 	petalPressed = 0;
+	offset = 0;
 }
 
 public void delay(int delay)
@@ -80,14 +82,17 @@ PImage mapDown;
 PImage greenCircle;
 
 // menu X and Y coords
-int menuX = 500;
-int menuY = 500;
+int menuX = 420;
+int menuY = 400;
 // menu diameter
 int menuXY = 60;
 
 //zoom and map display opens
 int zoomOpen = 0;
 int mapOpen = 0;
+
+//animation for petal
+int petalAnim = 0;
 
 // varibles for postions
 int menuX1 = menuX - 180;
@@ -124,7 +129,8 @@ public void petalNavControl(){
 	}
 
 	// pressed
-	if (mousePressed == true && (mouseX>menuX && mouseX<menuX+menuXY) && (mouseY>menuY && mouseY<menuY+menuXY)) //menuX-(menuXY/2)<mouseX && mouseX<menuX+(menuXY/2) && menuY-(menuXY/2)<mouseY && mouseY<menuY+(menuXY/2)) 
+	if (mousePressed == true && (mouseX>menuX && mouseX<menuX+menuXY) && 
+		(mouseY>menuY && mouseY<menuY+menuXY))
 	{
 		if (petalPressed == 0) 
 		{
@@ -145,27 +151,70 @@ public void petalNavControl(){
 	//control button actions
 	if (activated == 1) {
 		//search
-		if (mousePressed == true && (mouseX>menuX1 && mouseX<menuX1+menuXY) && (mouseY>menuY1 && mouseY<menuY1+menuXY)) {
+		if (mousePressed == true && (mouseX>menuX1 && mouseX<menuX1+menuXY) && 
+		(mouseY>menuY1 && mouseY<menuY1+menuXY)) {
 			currentScreen = 0;
 		}
 		//navigation
-		if (mousePressed == true && (mouseX>menuX2 && mouseX<menuX2+menuXY) && (mouseY>menuY2 && mouseY<menuY2+menuXY)) {
+		if (mousePressed == true && (mouseX>menuX2 && mouseX<menuX2+menuXY) && 
+		(mouseY>menuY2 && mouseY<menuY2+menuXY)) {
 			currentScreen = 2;
 		}
 		//services
-		if (mousePressed == true && (mouseX>menuX3 && mouseX<menuX3+menuXY) && (mouseY>menuY3 && mouseY<menuY3+menuXY)) {
+		if (mousePressed == true && (mouseX>menuX3 && mouseX<menuX3+menuXY) && 
+		(mouseY>menuY3 && mouseY<menuY3+menuXY)) {
 			currentScreen = 3;
 		}
 		//zoom
-		if (mousePressed == true && (mouseX>menuX4 && mouseX<menuX4+menuXY) && (mouseY>menuY4 && mouseY<menuY4+menuXY)) {
+		if (mousePressed == true && (mouseX>menuX4 && mouseX<menuX4+menuXY) && 
+		(mouseY>menuY4 && mouseY<menuY4+menuXY) && zoomOpen!=1) {
 			zoomOpen = 1;
 			mapOpen = 0;
+			delay(500);
 		}
 		//map display
-		if (mousePressed == true && (mouseX>menuX5 && mouseX<menuX5+menuXY) && (mouseY>menuY5 && mouseY<menuY5+menuXY)) {
+		if (mousePressed == true && (mouseX>menuX5 && mouseX<menuX5+menuXY) && 
+		(mouseY>menuY5 && mouseY<menuY5+menuXY) && mapOpen!=1) {
 			mapOpen = 1;
 			zoomOpen = 0;
+			delay(500);
 		}
+		if (zoomOpen == 1) {
+			if (mousePressed == true && (mouseX>menuX4 && mouseX<menuX4+menuXY) && 
+			(mouseY>menuY4-(menuXY/2) && mouseY<menuY4+(menuXY/2))) {
+				zoomLevel = zoomLevel + .1f;
+			}
+			if (mousePressed == true && (mouseX>menuX4 && mouseX<menuX4+menuXY) && 
+			(mouseY>menuY4+(menuXY/2) && mouseY<menuY4+menuXY+(menuXY/2))) {
+				zoomLevel = zoomLevel - .1f;
+			}
+		}
+		if (mapOpen == 1) {
+			if (mousePressed == true && (mouseX>menuX5 && mouseX<menuX5+menuXY) && 
+			(mouseY>menuY5-(menuXY/2) && mouseY<menuY5+(menuXY/2))) {
+				if (mapLevel == 2) {
+					mapLevel = 1;
+					delay(500);
+				}
+				else {
+					mapLevel = mapLevel + 1;
+					delay(500);
+				}
+			}
+			if (mousePressed == true && (mouseX>menuX5 && mouseX<menuX5+menuXY) && 
+			(mouseY>menuY5+(menuXY/2) && mouseY<menuY5+menuXY+(menuXY/2))) {
+				if (mapLevel == 1) {
+					mapLevel = 2;
+					delay(500);
+				}
+				else {
+					mapLevel = mapLevel - 1;
+					delay(500);
+				}
+
+			}
+		}
+
 	}
 }
 
@@ -214,11 +263,11 @@ public void petalNavDeactivated()
 }
 public void loadMap()
 {
-	if (mapNo == 1) {
+	if (mapLevel == 1) {
 		//load map 1
 		map = loadImage("map1.jpg");
 	}
-	if (mapNo == 2) {
+	if (mapLevel == 2) {
 		// load map 2
 		map = loadImage("map2.gif");
 	}
@@ -231,15 +280,17 @@ public void mapCenter()
 	mapY = (height-map.height)/2;
 }
 //map number
-int mapNo = 1;
+int mapLevel = 1;
 // image pos
-int mapX, mapY;
+float mapX, mapY;
 // create map
 PImage map;
-
+//where touched
+int touchedX,touchedY;
 
 // mouseposition offset to image
-int offX, offY;
+float offX, offY;
+int offset = 0;
 
 //zoomLevel level
 float zoomLevel = 1.0f;
@@ -256,10 +307,17 @@ public void mapScreen()
 
 	mapScreenControl();
 
+	//where pressed
+	if (mousePressed) {
+		touchedX = mouseX;
+		touchedY = mouseY;
+	}
+	// print(mouseX + "\n");
 	// get the offset
 	offX = mouseX-mapX;
 	offY = mouseY-mapY;	
-
+	// offX = 500;
+	// offY = 500;
 	mapScreenRender();
 
 }
@@ -268,7 +326,12 @@ public void mapScreenControl()
 {
 	//get new pos
 	if (mousePressed && mouseY>80 && mouseY<height-80)
-	{ 
+	{
+		if (offset == 0) {
+			offX = mouseX-mapX;
+			offY = mouseY-mapY;	
+			offset = 1;
+		}
 	 	mapX = mouseX-offX;
 	 	mapY = mouseY-offY;
 	}  
@@ -280,7 +343,7 @@ public void mapScreenControl()
 public void mapScreenRender()
 {
 	// update pos
-	image(map, mapX, mapY, width*zoomLevel, height*zoomLevel);
+	image(map, mapX, mapY, map.width*zoomLevel, map.height*zoomLevel);
 
 }
 public void mousePressed()
@@ -315,18 +378,51 @@ public void servScreen()
 {
 	print("welcome");
 }
+int textPressed = 0;
 public void startScreen()
 {
-
-	background(0, 152, 116);
 	startScreenControl();
+	startScreenRender();
+
 }
 
 public void startScreenControl()
 {
-	if (mousePressed == true) {
+	if (mousePressed == true && mouseX>350 && mouseX<450 && 
+	mouseY>height/2+40 && mouseY<height/2+100) {
 		currentScreen =1;
 	}
+	if (mousePressed == true && mouseX>100 && mouseX<700 && 
+	mouseY>(height/2)-40 && mouseY<height/2) {
+		textPressed = 1;
+	}
+}
+
+public void startScreenRender()
+{
+
+	background(0, 152, 116);
+	//render text box
+	rectMode(CORNER);
+	stroke(177, 99, 163);
+	strokeWeight(5);
+	fill(0, 152, 116);
+	rect(100, (height/2)-40, 600, 40,0,0,20,0);
+	noStroke();
+	rect(98, (height/2)-50, 605, 30);
+	//text
+	fill(50);
+	textSize(25);
+	if (textPressed == 1) {
+		fill(30);
+		text("ECG-15 |", (width/2)-280, (height/2)-15);	
+	}
+	else {
+		text("What are you looking for?_", (width/2)-280, (height/2)-15);
+	}
+	// go button
+	fill(177, 99, 163);
+	rect(350, height/2+40, 100, 60,15,15,15,15);
 }
   static public void main(String[] passedArgs) {
     String[] appletArgs = new String[] { "DyNav_main" };

@@ -8,7 +8,7 @@ int currentScreen = 0;
 // regular old setup
 void setup()
 {
-	size(800,980);
+	size(800,1280);
 	background(0);
 	cp5 = new ControlP5(this);
 }
@@ -35,11 +35,13 @@ void draw()
 		servScreen();
 	}
 	// print(frameRate + "\n");
+	print(offset);
 }
 
 void mouseReleased()
 {
 	petalPressed = 0;
+	offset = 0;
 }
 
 void delay(int delay)
