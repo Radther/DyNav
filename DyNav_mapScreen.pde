@@ -5,6 +5,7 @@ int mapX, mapY;
 // create map
 PImage map;
 
+
 // mouseposition offset to image
 int offX, offY;
 
@@ -38,26 +39,9 @@ void mapScreenControl()
 	{ 
 	 	mapX = mouseX-offX;
 	 	mapY = mouseY-offY;
-	} 
+	}  
 
 	// activate menu button
-	if (mousePressed == true && menuX-(menuXY/2)<mouseX && mouseX<menuX+(menuXY/2) && menuY-(menuXY/2)<mouseY && mouseY<menuY+(menuXY/2)) 
-	{
-		if (petalPressed == 0) 
-		{
-			if (activated == 0) {
-				petalPressed = 1;
-			 	activated = 1;
-			 }
-			 else {
-			 	petalPressed = 1;
-			 	activated = 0;
-			 	
-			 }
-			 
-		}
-
-	}
 
 }
 

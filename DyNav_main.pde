@@ -31,10 +31,19 @@ void draw()
 	if (currentScreen == 2) {
 		navScreen();
 	}
+	if (currentScreen == 3) {
+		servScreen();
+	}
 	// print(frameRate + "\n");
 }
 
 void mouseReleased()
 {
 	petalPressed = 0;
+}
+
+void delay(int delay)
+{
+  int time = millis();
+  while(millis() - time <= delay);
 }

@@ -1,0 +1,4 @@
+void servScreen()
+{
+	print("welcome");
+}
