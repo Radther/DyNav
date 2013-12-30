@@ -178,8 +178,8 @@ void petalNavActivated()
 	}
 	//map display
 	if (mapOpen == 1) {
-		image(mapUp, menuX5, menuY5+(menuXY/2));
-		image(mapDown, menuX5, menuY5-(menuXY/2));
+		image(mapDown, menuX5, menuY5+(menuXY/2));
+		image(mapUp, menuX5, menuY5-(menuXY/2));
 		mapReady = 1;
 	}
 	else {
