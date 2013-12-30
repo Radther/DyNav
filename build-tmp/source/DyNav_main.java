@@ -77,6 +77,7 @@ PImage navigation;
 PImage zoom;
 PImage zoomPlus;
 PImage zoomMinus;
+PImage mapLayer;
 PImage mapUp;
 PImage mapDown;
 PImage greenCircle;
@@ -89,7 +90,9 @@ int menuXY = 60;
 
 //zoom and map display opens
 int zoomOpen = 0;
+int zoomReady = 0;
 int mapOpen = 0;
+int mapReady = 0;
 
 //animation for petal
 int petalAnim = 0;
@@ -113,6 +116,9 @@ public void petalNav()
 	search = loadImage("search.png");
 	services = loadImage("services.png");
 	greenCircle = loadImage("greenCircle.png");
+	mapLayer = loadImage("mapLayer.png");
+	mapUp = loadImage("mapUp.png");
+	mapDown = loadImage("mapDown.png");
 
 	petalNavControl();
 
@@ -169,6 +175,7 @@ public void petalNavControl(){
 		if (mousePressed == true && (mouseX>menuX4 && mouseX<menuX4+menuXY) && 
 		(mouseY>menuY4 && mouseY<menuY4+menuXY) && zoomOpen!=1) {
 			zoomOpen = 1;
+			mapReady = 0;
 			mapOpen = 0;
 			delay(500);
 		}
@@ -177,9 +184,10 @@ public void petalNavControl(){
 		(mouseY>menuY5 && mouseY<menuY5+menuXY) && mapOpen!=1) {
 			mapOpen = 1;
 			zoomOpen = 0;
+			zoomReady = 0;
 			delay(500);
 		}
-		if (zoomOpen == 1) {
+		if (zoomReady == 1) {
 			if (mousePressed == true && (mouseX>menuX4 && mouseX<menuX4+menuXY) && 
 			(mouseY>menuY4-(menuXY/2) && mouseY<menuY4+(menuXY/2))) {
 				zoomLevel = zoomLevel + .1f;
@@ -189,27 +197,23 @@ public void petalNavControl(){
 				zoomLevel = zoomLevel - .1f;
 			}
 		}
-		if (mapOpen == 1) {
+		if (mapReady == 1) {
 			if (mousePressed == true && (mouseX>menuX5 && mouseX<menuX5+menuXY) && 
 			(mouseY>menuY5-(menuXY/2) && mouseY<menuY5+(menuXY/2))) {
 				if (mapLevel == 2) {
 					mapLevel = 1;
-					delay(500);
 				}
 				else {
 					mapLevel = mapLevel + 1;
-					delay(500);
 				}
 			}
 			if (mousePressed == true && (mouseX>menuX5 && mouseX<menuX5+menuXY) && 
 			(mouseY>menuY5+(menuXY/2) && mouseY<menuY5+menuXY+(menuXY/2))) {
 				if (mapLevel == 1) {
 					mapLevel = 2;
-					delay(500);
 				}
 				else {
 					mapLevel = mapLevel - 1;
-					delay(500);
 				}
 
 			}
@@ -236,17 +240,19 @@ public void petalNavActivated()
 	if (zoomOpen == 1) {
 		image(greenCircle, menuX4, menuY4+(menuXY/2));
 		image(greenCircle, menuX4, menuY4-(menuXY/2));
+		zoomReady = 1;
 	}
 	else {
 		image(greenCircle, menuX4, menuY4);
 	}
 	//map display
 	if (mapOpen == 1) {
-		image(greenCircle, menuX5, menuY5+(menuXY/2));
-		image(greenCircle, menuX5, menuY5-(menuXY/2));
+		image(mapUp, menuX5, menuY5+(menuXY/2));
+		image(mapDown, menuX5, menuY5-(menuXY/2));
+		mapReady = 1;
 	}
 	else {
-		image(greenCircle, menuX5, menuY5);
+		image(mapLayer, menuX5, menuY5);
 	}
 
 
