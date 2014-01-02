@@ -14,8 +14,8 @@ PImage mapDown;
 PImage greenCircle;
 
 // menu X and Y coords
-int menuX = 420;
-int menuY = 400;
+int menuX = 680;
+int menuY = 1160;
 // menu diameter
 int menuXY = 100;
 
@@ -29,16 +29,16 @@ int mapReady = 0;
 int petalAnim = 0;
 
 // varibles for postions
-int menuX1 = menuX - 180;
-int menuX2 = menuX - 165;
-int menuX3 = menuX - 130;
-int menuX4 = menuX - 70;
+int menuX1 = menuX - 250;
+int menuX2 = menuX - 230;
+int menuX3 = menuX - 175;
+int menuX4 = menuX - 95;
 int menuX5 = menuX - 0;
 int menuY1 = menuY - 0;
-int menuY2 = menuY - 70;
-int menuY3 = menuY - 130;
-int menuY4 = menuY - 165;
-int menuY5 = menuY - 180;
+int menuY2 = menuY - 95;
+int menuY3 = menuY - 175;
+int menuY4 = menuY - 230;
+int menuY5 = menuY - 250;
 //Petal navigation for map screen
 void petalNav()
 {
@@ -122,34 +122,39 @@ void petalNavControl(){
 			if (mousePressed == true && (mouseX>menuX4 && mouseX<menuX4+menuXY) && 
 			(mouseY>menuY4-(menuXY/2) && mouseY<menuY4+(menuXY/2))) {
 				zoomLevel = zoomLevel + .1;
+				delay(50);
 			}
 			if (mousePressed == true && (mouseX>menuX4 && mouseX<menuX4+menuXY) && 
 			(mouseY>menuY4+(menuXY/2) && mouseY<menuY4+menuXY+(menuXY/2))) {
 				zoomLevel = zoomLevel - .1;
+				delay(50);
 			}
 		}
 		if (mapReady == 1) {
 			if (mousePressed == true && (mouseX>menuX5 && mouseX<menuX5+menuXY) && 
 			(mouseY>menuY5-(menuXY/2) && mouseY<menuY5+(menuXY/2))) {
-				if (mapLevel == 2) {
+				if (mapLevel == 3) {
 					mapLevel = 1;
+					delay(50);
 				}
 				else {
 					mapLevel = mapLevel + 1;
+					delay(50);
 				}
 			}
 			if (mousePressed == true && (mouseX>menuX5 && mouseX<menuX5+menuXY) && 
 			(mouseY>menuY5+(menuXY/2) && mouseY<menuY5+menuXY+(menuXY/2))) {
 				if (mapLevel == 1) {
-					mapLevel = 2;
+					mapLevel = 3;
+					delay(50);
 				}
 				else {
 					mapLevel = mapLevel - 1;
+					delay(50);
 				}
 
 			}
 		}
-
 	}
 }
 
@@ -169,8 +174,8 @@ void petalNavActivated()
 	image(services, menuX3, menuY3);
 	//zoom
 	if (zoomOpen == 1) {
-		image(greenCircle, menuX4, menuY4+(menuXY/2));
-		image(greenCircle, menuX4, menuY4-(menuXY/2));
+		image(greenCircle, menuX4+25, menuY4+(menuXY/2));
+		image(greenCircle, menuX4-25, menuY4-(menuXY/2));
 		zoomReady = 1;
 	}
 	else {

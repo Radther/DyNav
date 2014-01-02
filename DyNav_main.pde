@@ -35,13 +35,15 @@ void draw()
 		servScreen();
 	}
 	// print(frameRate + "\n");
-	print(offset);
+	// print(offset);
 }
 
 void mouseReleased()
 {
 	petalPressed = 0;
 	offset = 0;
+	navPressed = 0;
+	move = 0;
 }
 
 void delay(int delay)

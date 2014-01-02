@@ -12,31 +12,12 @@ float offX, offY;
 int offset = 0;
 
 //zoomLevel level
-float zoomLevel = 1.0;
+float zoomLevel = 2.0;
 
 int petalPressed = 0;
 void mapScreen()
 {
-	background(0);
-
-	// cp5.addSlider("zoomLevel")
- //    	.setPosition(100,50)
- //    	.setRange(.5,5)
- //    	;
-
 	mapScreenControl();
-
-	//where pressed
-	if (mousePressed) {
-		touchedX = mouseX;
-		touchedY = mouseY;
-	}
-	// print(mouseX + "\n");
-	// get the offset
-	offX = mouseX-mapX;
-	offY = mouseY-mapY;	
-	// offX = 500;
-	// offY = 500;
 	mapScreenRender();
 
 }
@@ -44,7 +25,7 @@ void mapScreen()
 void mapScreenControl()
 {
 	//get new pos
-	if (mousePressed && mouseY>80 && mouseY<height-80)
+	if (mousePressed && mouseY>120 && mouseY<height-120)
 	{
 		if (offset == 0) {
 			offX = mouseX-mapX;
@@ -61,7 +42,24 @@ void mapScreenControl()
 
 void mapScreenRender()
 {
+	background(0);
 	// update pos
 	image(map, mapX, mapY, map.width*zoomLevel, map.height*zoomLevel);
+
+}
+
+void loadMap()
+{
+	if (mapLevel == 1) {
+		//load map 1
+		map = loadImage("map1.png");
+	}
+	if (mapLevel == 2) {
+		// load map 2
+		map = loadImage("map2.png");
+	}
+	if (mapLevel == 3) {
+		map = loadImage("map3.png");
+	}
 
 }

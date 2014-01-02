@@ -21,7 +21,7 @@ public class DyNav_main extends PApplet {
 ControlP5 cp5;
 
 // current screen
-int currentScreen = 0;
+int currentScreen = 1;
 
 // regular old setup
 public void setup()
@@ -53,13 +53,15 @@ public void draw()
 		servScreen();
 	}
 	// print(frameRate + "\n");
-	print(offset);
+	// print(offset);
 }
 
 public void mouseReleased()
 {
 	petalPressed = 0;
 	offset = 0;
+	navPressed = 0;
+	move = 0;
 }
 
 public void delay(int delay)
@@ -86,7 +88,7 @@ PImage greenCircle;
 int menuX = 420;
 int menuY = 400;
 // menu diameter
-int menuXY = 60;
+int menuXY = 100;
 
 //zoom and map display opens
 int zoomOpen = 0;
@@ -98,16 +100,16 @@ int mapReady = 0;
 int petalAnim = 0;
 
 // varibles for postions
-int menuX1 = menuX - 180;
-int menuX2 = menuX - 165;
-int menuX3 = menuX - 130;
-int menuX4 = menuX - 70;
+int menuX1 = menuX - 250;
+int menuX2 = menuX - 230;
+int menuX3 = menuX - 175;
+int menuX4 = menuX - 95;
 int menuX5 = menuX - 0;
 int menuY1 = menuY - 0;
-int menuY2 = menuY - 70;
-int menuY3 = menuY - 130;
-int menuY4 = menuY - 165;
-int menuY5 = menuY - 180;
+int menuY2 = menuY - 95;
+int menuY3 = menuY - 175;
+int menuY4 = menuY - 230;
+int menuY5 = menuY - 250;
 //Petal navigation for map screen
 public void petalNav()
 {
@@ -191,34 +193,39 @@ public void petalNavControl(){
 			if (mousePressed == true && (mouseX>menuX4 && mouseX<menuX4+menuXY) && 
 			(mouseY>menuY4-(menuXY/2) && mouseY<menuY4+(menuXY/2))) {
 				zoomLevel = zoomLevel + .1f;
+				delay(50);
 			}
 			if (mousePressed == true && (mouseX>menuX4 && mouseX<menuX4+menuXY) && 
 			(mouseY>menuY4+(menuXY/2) && mouseY<menuY4+menuXY+(menuXY/2))) {
 				zoomLevel = zoomLevel - .1f;
+				delay(50);
 			}
 		}
 		if (mapReady == 1) {
 			if (mousePressed == true && (mouseX>menuX5 && mouseX<menuX5+menuXY) && 
 			(mouseY>menuY5-(menuXY/2) && mouseY<menuY5+(menuXY/2))) {
-				if (mapLevel == 2) {
+				if (mapLevel == 3) {
 					mapLevel = 1;
+					delay(50);
 				}
 				else {
 					mapLevel = mapLevel + 1;
+					delay(50);
 				}
 			}
 			if (mousePressed == true && (mouseX>menuX5 && mouseX<menuX5+menuXY) && 
 			(mouseY>menuY5+(menuXY/2) && mouseY<menuY5+menuXY+(menuXY/2))) {
 				if (mapLevel == 1) {
-					mapLevel = 2;
+					mapLevel = 3;
+					delay(50);
 				}
 				else {
 					mapLevel = mapLevel - 1;
+					delay(50);
 				}
 
 			}
 		}
-
 	}
 }
 
@@ -238,8 +245,8 @@ public void petalNavActivated()
 	image(services, menuX3, menuY3);
 	//zoom
 	if (zoomOpen == 1) {
-		image(greenCircle, menuX4, menuY4+(menuXY/2));
-		image(greenCircle, menuX4, menuY4-(menuXY/2));
+		image(greenCircle, menuX4+25, menuY4+(menuXY/2));
+		image(greenCircle, menuX4-25, menuY4-(menuXY/2));
 		zoomReady = 1;
 	}
 	else {
@@ -247,8 +254,8 @@ public void petalNavActivated()
 	}
 	//map display
 	if (mapOpen == 1) {
-		image(mapUp, menuX5, menuY5+(menuXY/2));
-		image(mapDown, menuX5, menuY5-(menuXY/2));
+		image(mapDown, menuX5, menuY5+(menuXY/2));
+		image(mapUp, menuX5, menuY5-(menuXY/2));
 		mapReady = 1;
 	}
 	else {
@@ -267,18 +274,7 @@ public void petalNavDeactivated()
 	mapOpen = 0;
 	image(mainMenu, menuX, menuY);
 }
-public void loadMap()
-{
-	if (mapLevel == 1) {
-		//load map 1
-		map = loadImage("map1.jpg");
-	}
-	if (mapLevel == 2) {
-		// load map 2
-		map = loadImage("map2.gif");
-	}
 
-}
 public void mapCenter()
 {
 	// center the map
@@ -304,26 +300,7 @@ float zoomLevel = 1.0f;
 int petalPressed = 0;
 public void mapScreen()
 {
-	background(0);
-
-	// cp5.addSlider("zoomLevel")
- //    	.setPosition(100,50)
- //    	.setRange(.5,5)
- //    	;
-
 	mapScreenControl();
-
-	//where pressed
-	if (mousePressed) {
-		touchedX = mouseX;
-		touchedY = mouseY;
-	}
-	// print(mouseX + "\n");
-	// get the offset
-	offX = mouseX-mapX;
-	offY = mouseY-mapY;	
-	// offX = 500;
-	// offY = 500;
 	mapScreenRender();
 
 }
@@ -348,8 +325,25 @@ public void mapScreenControl()
 
 public void mapScreenRender()
 {
+	background(0);
 	// update pos
 	image(map, mapX, mapY, map.width*zoomLevel, map.height*zoomLevel);
+
+}
+
+public void loadMap()
+{
+	if (mapLevel == 1) {
+		//load map 1
+		map = loadImage("map1.png");
+	}
+	if (mapLevel == 2) {
+		// load map 2
+		map = loadImage("map2.png");
+	}
+	if (mapLevel == 3) {
+		map = loadImage("map3.png");
+	}
 
 }
 public void mousePressed()
@@ -357,29 +351,76 @@ public void mousePressed()
 
 }
 int rows;
- public void navScreen()
- {
- 	background(255);
+int move = 0;
+int moveOff = 0;
+int navPressed = 0;
+int scriptRun = 0;
+PImage back;
+public void navScreen()
+{
+	int rows = (height/80) + 1;
+	back = loadImage("back.png");
+
+
+	// rows = 16;
+	// print(rows);
+	navScreenControl();
+	navScreenRender();	
+	if (scriptRun == 0) {
+
+		scriptRun = 1;
+	}
+}
+public void navScreenControl()
+{
+	if (mousePressed) {
+		if (navPressed == 0) {
+			moveOff = -mouseY;
+			navPressed = 1;
+		}
+		move = mouseY+moveOff;
+	}
+	if (mousePressed && mouseX>700 && mouseX<780 && mouseY<80) {
+		open("/Users/Tom/Documents/pi.py");		
+	}
+}
+
+public void navScreenRender()
+{
+	background(255);
+
+ 	//lines
+ 	stroke(0);
+ 	strokeWeight(1);
+ 	line(0, 80*2+move, width, 80*2+move);
+ 	textAlign(LEFT, CENTER);
+ 	textSize(24);
+ 	fill(0);
+ 	text("1. From the entrence to left. Walk until you see the stairs.", 40, 80*1+40+move);
+ 	line(0, 80*3+move, width, 80*3+move);
+ 	text("2. Walk past the stairs and turn left. You will see starbucks.", 40, 80*2+40+move);
+ 	line(0, 80*4+move, width, 80*4+move);
+ 	text("3. ECG-15 will be on the right next to the starbucks", 40, 80*3+40+move);
+ 	line(0, 80*5+move, width, 80*5+move);
+ 	line(0, 80*6+move, width, 80*6+move);
+ 	line(0, 80*7+move, width, 80*7+move);
+ 	line(0, 80*8+move, width, 80*8+move);
+ 	line(0, 80*9+move, width, 80*9+move);
+ 	line(0, 80*10+move, width, 80*10+move);
+ 	line(0, 80*11+move, width, 80*11+move);
+ 	line(0, 80*12+move, width, 80*12+move);
+ 	line(0, 80*13+move, width, 80*13+move);
+ 	line(0, 80*14+move, width, 80*14+move);
+ 	line(0, 80*15+move, width, 80*15+move);
+ 	line(0, 80*16+move, width, 80*16+move);
+
+ 	//other stuff
  	noStroke();
  	fill(0, 152, 116);
  	rect(0, 0, width, 80);
+ 	image(back, 0, 0);
 
-	int rows = (height/80) + 1;
-	// print(rows);
-	
 }
-
-public void nav_screenRender()
-{
-		for (int i = 2; i<rows; i = i + 1) {
-		stroke(0);
-		strokeWeight(1);
-		strokeCap(ROUND);
-		line(0, i*80, width-0, i*80);
-
-	}
-
- }
 public void servScreen()
 {
 	print("welcome");
