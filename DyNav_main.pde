@@ -1,9 +1,25 @@
 //import controlP5 for sliders and whatnot
+import javax.mail.*;
+import java.util.*;
+import javax.mail.internet.*;
+
 import controlP5.*;
 ControlP5 cp5;
 
 // current screen
 int currentScreen = 0;
+int arrow = 0;
+
+//mail
+String mail1 = "hey";
+String mail2 = "hey";
+
+//language
+int language = 0;
+String looking = "";
+String nav1 = "";
+String nav2 = "";
+String nav3 = "";
 
 // regular old setup
 void setup()
@@ -11,10 +27,12 @@ void setup()
 	size(800,1280);
 	background(0);
 	cp5 = new ControlP5(this);
+	language();
 }
 
 void draw()
 {
+	// language();
 	//startscreen
 	if (currentScreen == 0)
 	{
@@ -23,7 +41,9 @@ void draw()
 	//mapscreen
 	if (currentScreen == 1) 
 	{
+		arrow = 0;
 		loadMap();
+		petalNav();
 		mapScreen();
 		petalNav();
 	}
@@ -34,8 +54,16 @@ void draw()
 	if (currentScreen == 3) {
 		servScreen();
 	}
+	if (currentScreen == 4) {
+		arrow = 1;
+		loadMap();
+		petalNav();
+		mapScreen();
+		petalNav();
+	}
 	// print(frameRate + "\n");
 	// print(offset);
+
 }
 
 void mouseReleased()
@@ -44,10 +72,28 @@ void mouseReleased()
 	offset = 0;
 	navPressed = 0;
 	move = 0;
+	dragged = 0;
 }
 
 void delay(int delay)
 {
   int time = millis();
   while(millis() - time <= delay);
+}
+
+void language()
+{
+	if (language == 0) {
+		looking = "What are you looking for?";
+		nav1 = "1. From the entrence to left. Walk until you see the stairs";
+		nav2 = "2. Walk past the stairs and turn left. You will see starbucks";
+		nav3 = "3. ECG-15 will be on the right next to the starbucks";
+	}
+	else if (language == 1) {
+		looking = "Czego szukasz?";
+		nav1 = "Z Entrence do lewej. Idź aż zobaczysz po schodach";
+		nav2 = "Przejść obok schodów i skręcić w lewo. Zobaczysz Starbucks";
+		nav3 = "EKG-15 będzie po prawej stronie, obok Starbucks";
+	}
+
 }
