@@ -3,9 +3,6 @@ import javax.mail.*;
 import java.util.*;
 import javax.mail.internet.*;
 
-import controlP5.*;
-ControlP5 cp5;
-
 // current screen
 int currentScreen = 0;
 int arrow = 0;
@@ -26,7 +23,6 @@ void setup()
 {
 	size(800,1280);
 	background(0);
-	cp5 = new ControlP5(this);
 	language();
 }
 

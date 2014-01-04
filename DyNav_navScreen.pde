@@ -73,5 +73,6 @@ void navScreenRender()
  	fill(0, 152, 116);
  	rect(0, 0, width, 80);
  	image(back, 0, 0);
+ 	rect(0, 0, width, 80);
 
 }

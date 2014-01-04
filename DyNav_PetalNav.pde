@@ -15,7 +15,7 @@ PImage greenCircle;
 
 // menu X and Y coords
 int menuX = 680;
-int menuY = 500;
+int menuY = 560;
 // menu diameter
 int menuXY = 100;
 

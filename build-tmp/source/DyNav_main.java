@@ -6,7 +6,6 @@ import processing.opengl.*;
 import javax.mail.*; 
 import java.util.*; 
 import javax.mail.internet.*; 
-import controlP5.*; 
 import javax.mail.Authenticator; 
 import javax.mail.PasswordAuthentication; 
 
@@ -47,9 +46,6 @@ public class DyNav_main extends PApplet {
 
 
 
-
-ControlP5 cp5;
-
 // current screen
 int currentScreen = 0;
 int arrow = 0;
@@ -70,7 +66,6 @@ public void setup()
 {
 	size(800,1280);
 	background(0);
-	cp5 = new ControlP5(this);
 	language();
 }
 
@@ -158,7 +153,7 @@ PImage greenCircle;
 
 // menu X and Y coords
 int menuX = 680;
-int menuY = 500;
+int menuY = 560;
 // menu diameter
 int menuXY = 100;
 
@@ -353,7 +348,6 @@ public void petalNavDeactivated()
 	mapOpen = 0;
 	image(mainMenu, menuX, menuY);
 }
-
 public void mail()
 {
 
@@ -526,10 +520,6 @@ public void loadMap()
 		}
 	}
 }
-public void mousePressed()
-{
-
-}
 
 int rows;
 int move = 0;
@@ -605,6 +595,7 @@ public void navScreenRender()
  	fill(0, 152, 116);
  	rect(0, 0, width, 80);
  	image(back, 0, 0);
+ 	rect(0, 0, width, 80);
 
 }
 PImage coffee;
