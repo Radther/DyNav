@@ -20,6 +20,11 @@ void sendMail() {
   props.put("mail.smtp.host", host);
   props.put("mail.smtp.port", "25");
   props.put("mail.smtp.auth", "true");
+  props.put("mail.smtp.socketFactory.port", "465");
+ props.put("mail.smtp.socketFactory.class",
+                           "javax.net.ssl.SSLSocketFactory");
+ props.put("mail.smtp.auth", "true");
+ props.put("mail.smtp.port", "465");
   // We need TTLS, which gmail requires
   props.put("mail.smtp.starttls.enable","true");
 
@@ -32,10 +37,10 @@ void sendMail() {
     MimeMessage message = new MimeMessage(session);
 
     // Who is this message from
-    message.setFrom(new InternetAddress("tomquil13@gmail.com", "Tom"));
+    message.setFrom(new InternetAddress("", ""));
 
     // Who is this message to (we could do fancier things like make a list or add CC's)
-    message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("u3MHJadTLtG46zAyrxt538p3rpvJKy@api.pushover.net", false));
+    message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("", false));
 
     // Subject and body
     message.setSubject(mail1);
@@ -63,9 +68,9 @@ public class Auth extends Authenticator {
 
   public PasswordAuthentication getPasswordAuthentication() {
     String username, password;
-    username = "********************";
-    password = "*********";
-    // System.out.println("authenticating. . ");
+    username = "";
+    password = "";
+    System.out.println("authenticating. . ");
     return new PasswordAuthentication(username, password);
   }
 }

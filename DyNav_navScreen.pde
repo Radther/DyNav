@@ -4,11 +4,11 @@ int move = 0;
 int moveOff = 0;
 int navPressed = 0;
 int scriptRun = 0;
-PImage back;
+// PImage back;
 void navScreen()
 {
 	int rows = (height/80) + 1;
-	back = loadImage("back.png");
+	// back = loadImage("back.png");
 
 
 	// rows = 16;
@@ -32,10 +32,15 @@ void navScreenControl()
 	if (mousePressed && mouseX>700 && mouseX<780 && mouseY<80) {
 		mail1 = "DIRECTIONS";
 		mail2 = "1. From the entrence to left. Walk until you see the stairs. 2. Walk past the stairs and turn left. You will see starbucks. 3. ECG-15 will be on the right next to the starbucks.";
-		mail();
+		// mail();
 	}
 	if (mousePressed && mouseX<120 && mouseY<80) {
 		currentScreen = 1;
+	}
+	if (mousePressed && mouseX>700 && mouseY>1180) {
+		mail1 = "And with that...";
+		mail2 = "Are there any questions";
+		// mail();
 	}
 }
 
@@ -72,7 +77,7 @@ void navScreenRender()
  	noStroke();
  	fill(0, 152, 116);
  	rect(0, 0, width, 80);
- 	image(back, 0, 0);
+ 	// image(back, 0, 0);
  	rect(0, 0, width, 80);
 
 }

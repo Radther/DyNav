@@ -8,7 +8,7 @@ void servScreen()
 	toiletserv = loadImage("toiletserv.png");
 	computer = loadImage("computer.png");
 	sigma = loadImage("sigma.png");
-	back = loadImage("back.png");
+	// back = loadImage("back.png");
 
 	servScreenRender();
 	delay(40);
@@ -51,5 +51,5 @@ void servScreenRender()
  	fill(0, 152, 116);
  	rect(0, 0, 800, 80);
  	rect(0, 0, 700, 200);
- 	image(back, 0, 0);
+ 	// image(back, 0, 0);
 }

@@ -102,6 +102,10 @@ public void draw()
 	}
 	// print(frameRate + "\n");
 	// print(offset);
+	if (mousePressed) {
+		respond();	
+	}
+	
 
 }
 
@@ -136,6 +140,15 @@ public void language()
 	}
 
 }
+
+public void respond()
+{
+	stroke(51, 181, 229, 200);
+	fill(0, 0);
+	strokeWeight(5);
+	ellipseMode(CENTER);
+	ellipse(mouseX, mouseY, 150, 150);
+}
 //is it on or not
 int activated =0;
 //create images
@@ -153,7 +166,7 @@ PImage greenCircle;
 
 // menu X and Y coords
 int menuX = 680;
-int menuY = 560;
+int menuY = 500;
 // menu diameter
 int menuXY = 100;
 
@@ -193,6 +206,7 @@ public void petalNav()
 	zoom = loadImage("zoom.png");
 	zoomPlus = loadImage("zoomPlus.png");
 	zoomMinus = loadImage("zoomMinus.png");
+	navigation = loadImage("navigation.png");
 
 	petalNavControl();
 
@@ -314,7 +328,7 @@ public void petalNavActivated()
 	// search
 	image(search, menuX1, menuY1);
 	// navigation
-	image(greenCircle, menuX2, menuY2);
+	image(navigation, menuX2, menuY2);
 	// services
 	image(services, menuX3, menuY3);
 	//zoom
@@ -370,6 +384,11 @@ public void sendMail() {
   props.put("mail.smtp.host", host);
   props.put("mail.smtp.port", "25");
   props.put("mail.smtp.auth", "true");
+  props.put("mail.smtp.socketFactory.port", "465");
+ props.put("mail.smtp.socketFactory.class",
+                           "javax.net.ssl.SSLSocketFactory");
+ props.put("mail.smtp.auth", "true");
+ props.put("mail.smtp.port", "465");
   // We need TTLS, which gmail requires
   props.put("mail.smtp.starttls.enable","true");
 
@@ -382,10 +401,10 @@ public void sendMail() {
     MimeMessage message = new MimeMessage(session);
 
     // Who is this message from
-    message.setFrom(new InternetAddress("tomquil13@gmail.com", "Tom"));
+    message.setFrom(new InternetAddress("", ""));
 
     // Who is this message to (we could do fancier things like make a list or add CC's)
-    message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("u3MHJadTLtG46zAyrxt538p3rpvJKy@api.pushover.net", false));
+    message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("", false));
 
     // Subject and body
     message.setSubject(mail1);
@@ -413,9 +432,9 @@ public class Auth extends Authenticator {
 
   public PasswordAuthentication getPasswordAuthentication() {
     String username, password;
-    username = "********************";
-    password = "*********";
-    // System.out.println("authenticating. . ");
+    username = "";
+    password = "";
+    System.out.println("authenticating. . ");
     return new PasswordAuthentication(username, password);
   }
 }
@@ -526,11 +545,11 @@ int move = 0;
 int moveOff = 0;
 int navPressed = 0;
 int scriptRun = 0;
-PImage back;
+// PImage back;
 public void navScreen()
 {
 	int rows = (height/80) + 1;
-	back = loadImage("back.png");
+	// back = loadImage("back.png");
 
 
 	// rows = 16;
@@ -554,10 +573,15 @@ public void navScreenControl()
 	if (mousePressed && mouseX>700 && mouseX<780 && mouseY<80) {
 		mail1 = "DIRECTIONS";
 		mail2 = "1. From the entrence to left. Walk until you see the stairs. 2. Walk past the stairs and turn left. You will see starbucks. 3. ECG-15 will be on the right next to the starbucks.";
-		mail();
+		// mail();
 	}
 	if (mousePressed && mouseX<120 && mouseY<80) {
 		currentScreen = 1;
+	}
+	if (mousePressed && mouseX>700 && mouseY>1180) {
+		mail1 = "And with that...";
+		mail2 = "Are there any questions";
+		// mail();
 	}
 }
 
@@ -594,7 +618,7 @@ public void navScreenRender()
  	noStroke();
  	fill(0, 152, 116);
  	rect(0, 0, width, 80);
- 	image(back, 0, 0);
+ 	// image(back, 0, 0);
  	rect(0, 0, width, 80);
 
 }
@@ -608,7 +632,7 @@ public void servScreen()
 	toiletserv = loadImage("toiletserv.png");
 	computer = loadImage("computer.png");
 	sigma = loadImage("sigma.png");
-	back = loadImage("back.png");
+	// back = loadImage("back.png");
 
 	servScreenRender();
 	delay(40);
@@ -651,12 +675,14 @@ public void servScreenRender()
  	fill(0, 152, 116);
  	rect(0, 0, 800, 80);
  	rect(0, 0, 700, 200);
- 	image(back, 0, 0);
+ 	// image(back, 0, 0);
 }
 int textPressed = 0;
 int languageOpen = 0;
+PImage logo;
 public void startScreen()
 {
+	logo = loadImage("logo.png");
 	startScreenControl();
 	startScreenRender();
 
@@ -736,6 +762,7 @@ public void startScreenRender()
 		fill(0);
 		text("language", width/2, height/2-150);
 	}
+	image(logo, 250, 150, 300, 300);
 
 }
 

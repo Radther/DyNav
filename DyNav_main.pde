@@ -59,6 +59,10 @@ void draw()
 	}
 	// print(frameRate + "\n");
 	// print(offset);
+	if (mousePressed) {
+		respond();	
+	}
+	
 
 }
 
@@ -92,4 +96,13 @@ void language()
 		nav3 = "EKG-15 będzie po prawej stronie, obok Starbucks";
 	}
 
+}
+
+void respond()
+{
+	stroke(51, 181, 229, 200);
+	fill(0, 0);
+	strokeWeight(5);
+	ellipseMode(CENTER);
+	ellipse(mouseX, mouseY, 150, 150);
 }

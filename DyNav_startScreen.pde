@@ -1,7 +1,9 @@
 int textPressed = 0;
 int languageOpen = 0;
+PImage logo;
 void startScreen()
 {
+	logo = loadImage("logo.png");
 	startScreenControl();
 	startScreenRender();
 
@@ -81,6 +83,7 @@ void startScreenRender()
 		fill(0);
 		text("language", width/2, height/2-150);
 	}
+	image(logo, 250, 150, 300, 300);
 
 }
 

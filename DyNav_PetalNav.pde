@@ -15,7 +15,7 @@ PImage greenCircle;
 
 // menu X and Y coords
 int menuX = 680;
-int menuY = 560;
+int menuY = 1160;
 // menu diameter
 int menuXY = 100;
 
@@ -55,6 +55,7 @@ void petalNav()
 	zoom = loadImage("zoom.png");
 	zoomPlus = loadImage("zoomPlus.png");
 	zoomMinus = loadImage("zoomMinus.png");
+	navigation = loadImage("navigation.png");
 
 	petalNavControl();
 
@@ -176,7 +177,7 @@ void petalNavActivated()
 	// search
 	image(search, menuX1, menuY1);
 	// navigation
-	image(greenCircle, menuX2, menuY2);
+	image(navigation, menuX2, menuY2);
 	// services
 	image(services, menuX3, menuY3);
 	//zoom
